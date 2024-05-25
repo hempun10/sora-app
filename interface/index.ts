@@ -6,3 +6,24 @@ export interface BottomBarProps {
   focused: boolean;
   name: string;
 }
+
+export interface CustomButtonProps {
+  title: string;
+  handlePress: () => void;
+  containerStyles?: string;
+  textStyles?: string;
+  isLoading?: boolean;
+}
+
+export interface LoaderProps {
+  isLoading: boolean;
+}
+
+export interface FormFieldProps {
+  title: string;
+  value: string;
+  handleChange: (value: string) => void;
+  otherStyles?: string;
+  keyboardType?: "default" | "email-address" | "numeric" | "phone-pad";
+  placeholder?: string;
+}

@@ -6,11 +6,12 @@ import {
   View,
 } from "react-native";
 import React, { useEffect } from "react";
-import { Link, useNavigation } from "expo-router";
+import { Link, router, Redirect } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { images } from "@/constants";
 import "../global.css";
 import { StatusBar } from "expo-status-bar";
+import CustomButton from "@/components/CustomButton";
 
 export default function Welcome() {
   return (
@@ -59,14 +60,13 @@ export default function Welcome() {
             Exploration with Sora
           </Text>
 
-          {/* <CustomButton
+          <CustomButton
             title="Continue with Email"
-            handlePress={() => router.push("/sign-in")}
+            handlePress={() => router.push("/(auth)/sign-in")}
             containerStyles="w-full mt-7"
-          /> */}
+          />
         </View>
       </ScrollView>
-
       <StatusBar backgroundColor="#161622" style="light" />
     </SafeAreaView>
   );
