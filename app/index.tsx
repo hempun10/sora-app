@@ -12,8 +12,13 @@ import { images } from "@/constants";
 import "../global.css";
 import { StatusBar } from "expo-status-bar";
 import CustomButton from "@/components/CustomButton";
+import { useGlobalContext } from "@/context/globalProvider";
 
 export default function Welcome() {
+  const { isLoading, isLoggedIn } = useGlobalContext();
+
+  if (!isLoading && isLoggedIn) return <Redirect href={"/home"} />;
+
   return (
     <SafeAreaView
       className=" h-full"
