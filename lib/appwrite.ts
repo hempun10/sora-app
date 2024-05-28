@@ -74,19 +74,19 @@ export const createUser = async (
 export async function signIn(email: string, password: string) {
   try {
     //If previous session exists, delete it
-    const doesSessionExist = await account.get();
-    console.log(doesSessionExist);
-    if (doesSessionExist) {
-      await account
-        .deleteSession(doesSessionExist.$id)
-        .then(() => {
-          console.log("Previous session deleted");
-        })
-        .catch((e) => {
-          console.log(e);
-          throw new Error("Failed to delete previous session");
-        });
-    }
+    // const doesSessionExist = await account.get();
+    // console.log(doesSessionExist);
+    // if (doesSessionExist) {
+    //   await account
+    //     .deleteSession(doesSessionExist.$id)
+    //     .then(() => {
+    //       console.log("Previous session deleted");
+    //     })
+    //     .catch((e) => {
+    //       console.log(e);
+    //       throw new Error("Failed to delete previous session");
+    //     });
+    // }
     const session = await account.createEmailPasswordSession(email, password);
     if (!session) {
       throw Error;
@@ -115,5 +115,37 @@ export const getCurrentUser = async () => {
     return currentUser.documents[0];
   } catch (error) {
     console.log(error);
+  }
+};
+
+export const getVideos = async () => {
+  try {
+    const videos = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.videoCollectionId
+    );
+    if (!videos) {
+      throw new Error("Failed to fetch videos");
+    }
+    return videos.documents;
+  } catch (error) {
+    //@ts-ignore
+    throw new Error(error);
+  }
+};
+export const getLatestVideos = async () => {
+  try {
+    const videos = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.videoCollectionId,
+      [Query.orderDesc("$createdAt"), Query.limit(7)]
+    );
+    if (!videos) {
+      throw new Error("Failed to fetch videos");
+    }
+    return videos.documents;
+  } catch (error) {
+    //@ts-ignore
+    throw new Error(error);
   }
 };

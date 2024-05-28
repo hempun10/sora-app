@@ -27,3 +27,13 @@ export interface FormFieldProps {
   keyboardType?: "default" | "email-address" | "numeric" | "phone-pad";
   placeholder?: string;
 }
+export interface SearchInputProps {
+  value: string;
+  handleChange: (value: string) => void;
+  otherStyles?: string;
+}
+
+export interface EmptyStateProps {
+  title: string;
+  subtitle: string;
+}
