@@ -66,7 +66,7 @@ const Home = () => {
               <Text className=" text-gray-100 text-lg font-pregular mb-3">
                 Trending Videos
               </Text>
-              <Trending posts={trendingVideos ?? []} />
+              <Trending trendingVideos={trendingVideos ?? []} />
             </View>
           </View>
         )}
